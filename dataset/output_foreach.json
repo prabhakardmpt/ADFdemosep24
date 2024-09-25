@@ -1,0 +1,27 @@
+{
+	"name": "output_foreach",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sep24practice",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"folderName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "@dataset().folderName",
+					"type": "Expression"
+				},
+				"container": "sep24"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

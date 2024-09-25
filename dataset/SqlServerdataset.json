@@ -1,0 +1,36 @@
+{
+	"name": "SqlServerdataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_linkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "EmpID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ename",
+				"type": "varchar"
+			},
+			{
+				"name": "Dname",
+				"type": "varchar"
+			},
+			{
+				"name": "Sal",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "emp_identity"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,187 @@
+{
+	"name": "execute_pipelie",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "copyblob_blob",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"serverName_cloud": {
+							"value": "@pipeline().parameters.servername_cloud",
+							"type": "Expression"
+						},
+						"dbName_cloud": {
+							"value": "@pipeline().parameters.dbName_cloud",
+							"type": "Expression"
+						},
+						"userName_cloud": {
+							"value": "@pipeline().parameters.userName_cloud",
+							"type": "Expression"
+						},
+						"pwd_cloud": {
+							"value": "@pipeline().parameters.pwd_cloud",
+							"type": "Expression"
+						},
+						"sp_name": {
+							"value": "@pipeline().parameters.sp_name",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Execute Pipeline2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "tmt_denpendency trigger",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": {
+						"value": "@pipeline().parameters.sp_name",
+						"type": "Expression"
+					},
+					"storedProcedureParameters": {
+						"ADFName": {
+							"value": {
+								"value": "@pipeline().DataFactory",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Pipeline_Name": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Run_id": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Trigger_id": {
+							"value": {
+								"value": "@pipeline().TriggerId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Trigger_Name": {
+							"value": {
+								"value": "@pipeline().TriggerName",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Trigger_time": {
+							"value": {
+								"value": "@pipeline().TriggerTime",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"TriggerType": {
+							"value": {
+								"value": "@pipeline().TriggerType",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_linkeservice",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"serverName_cloud": {
+							"value": "@pipeline().parameters.servername_cloud",
+							"type": "Expression"
+						},
+						"dbName_cloud": {
+							"value": "@pipeline().parameters.dbName_cloud",
+							"type": "Expression"
+						},
+						"userName_cloud": {
+							"value": "@pipeline().parameters.userName_cloud",
+							"type": "Expression"
+						},
+						"pwd_cloud": {
+							"value": "@pipeline().parameters.pwd_cloud",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"servername_cloud": {
+				"type": "string"
+			},
+			"dbName_cloud": {
+				"type": "string"
+			},
+			"userName_cloud": {
+				"type": "string"
+			},
+			"pwd_cloud": {
+				"type": "string"
+			},
+			"sp_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-09-19T10:43:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

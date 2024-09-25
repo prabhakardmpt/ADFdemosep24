@@ -1,0 +1,33 @@
+{
+	"name": "event_csv_input",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sep24practice",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"fileName_csv": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().fileName_csv",
+					"type": "Expression"
+				},
+				"folderPath": "eventcsv",
+				"container": "sep24"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

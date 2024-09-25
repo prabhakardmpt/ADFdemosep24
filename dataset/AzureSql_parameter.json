@@ -1,0 +1,55 @@
+{
+	"name": "AzureSql_parameter",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_linkeservice",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"serverName_cloud": {
+					"value": "@dataset().serverName_cloud",
+					"type": "Expression"
+				},
+				"dbName_cloud": {
+					"value": "@dataset().dbName_cloud",
+					"type": "Expression"
+				},
+				"userName_cloud": {
+					"value": "@dataset().userName_cloud",
+					"type": "Expression"
+				},
+				"pwd_cloud": {
+					"value": "@dataset().pwd_cloud",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"tableName_cloud": {
+				"type": "string"
+			},
+			"serverName_cloud": {
+				"type": "string"
+			},
+			"dbName_cloud": {
+				"type": "string"
+			},
+			"userName_cloud": {
+				"type": "string"
+			},
+			"pwd_cloud": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().tableName_cloud",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

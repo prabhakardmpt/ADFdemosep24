@@ -1,0 +1,17 @@
+{
+	"name": "AzureSql_prabhakar",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_linkeservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "emp_shivacopy"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

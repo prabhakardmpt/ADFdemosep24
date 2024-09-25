@@ -1,0 +1,81 @@
+{
+	"name": "copyshiva_cloud",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SqlServer_shivadb",
+						"type": "DatasetReference",
+						"parameters": {
+							"serverNameInput": {
+								"value": "@pipeline().parameters.serverNameInput",
+								"type": "Expression"
+							},
+							"dbNameInput": {
+								"value": "@pipeline().parameters.dbNameInput",
+								"type": "Expression"
+							},
+							"tableNameInput": {
+								"value": "@pipeline().parameters.tableNameinput",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSql_prabhakar",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"serverNameInput": {
+				"type": "string"
+			},
+			"dbNameInput": {
+				"type": "string"
+			},
+			"tableNameinput": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-09-14T15:08:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

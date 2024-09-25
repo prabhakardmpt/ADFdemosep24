@@ -1,0 +1,112 @@
+{
+	"name": "copySS_AzureSS",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SqlServer_parameter",
+						"type": "DatasetReference",
+						"parameters": {
+							"tableNameInput": {
+								"value": "@pipeline().parameters.tableNameInput",
+								"type": "Expression"
+							},
+							"dbNameInput": {
+								"value": "@pipeline().parameters.dbNameinput",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSql_parameter",
+						"type": "DatasetReference",
+						"parameters": {
+							"tableName_cloud": {
+								"value": "@pipeline().parameters.tableName_cloud",
+								"type": "Expression"
+							},
+							"serverName_cloud": {
+								"value": "@pipeline().parameters.serverName_cloud",
+								"type": "Expression"
+							},
+							"dbName_cloud": {
+								"value": "@pipeline().parameters.dbName_cloud",
+								"type": "Expression"
+							},
+							"userName_cloud": {
+								"value": "@pipeline().parameters.userName_cloud",
+								"type": "Expression"
+							},
+							"pwd_cloud": {
+								"value": "@pipeline().parameters.pwd_cloud",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"dbNameinput": {
+				"type": "string"
+			},
+			"tableNameInput": {
+				"type": "string"
+			},
+			"tableName_cloud": {
+				"type": "string"
+			},
+			"serverName_cloud": {
+				"type": "string"
+			},
+			"dbName_cloud": {
+				"type": "string"
+			},
+			"userName_cloud": {
+				"type": "string"
+			},
+			"pwd_cloud": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-09-14T15:08:24Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,28 @@
+{
+	"name": "eventtrigger_setvaraible",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "loadhour_dailysales_setVariable",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"fileName": "@triggerBody().fileName"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/sep24/blobs/eventcsv",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/1693b4f5-75a9-4581-8cc0-10266837daa3/resourceGroups/RG1TestGroup/providers/Microsoft.Storage/storageAccounts/sep24storageaccount",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

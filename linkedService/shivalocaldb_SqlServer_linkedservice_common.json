@@ -1,0 +1,29 @@
+{
+	"name": "shivalocaldb_SqlServer_linkedservice_common",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"parameters": {
+			"serverNameinput": {
+				"type": "string"
+			},
+			"dbNameinput": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "@{linkedService().serverNameinput}",
+			"database": "@{linkedService().dbNameinput}",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "Windows",
+			"userName": "shiva",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkNzg1YjY0Yi0yOWFlLTQ5NWYtYTViNC0yYzlmODllMDcyOTUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "selfhostedHR-anothersystem",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,41 @@
+{
+	"name": "SqlServer_shivadb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "shivalocaldb_SqlServer_linkedservice_common",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"serverNameinput": {
+					"value": "@dataset().serverNameInput",
+					"type": "Expression"
+				},
+				"dbNameinput": {
+					"value": "@dataset().dbNameInput",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"serverNameInput": {
+				"type": "string"
+			},
+			"dbNameInput": {
+				"type": "string"
+			},
+			"tableNameInput": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().tableNameInput",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

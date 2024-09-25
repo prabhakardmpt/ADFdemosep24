@@ -1,0 +1,34 @@
+{
+	"name": "SqlServer_parameter",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_common_linkedservice",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"dbName": {
+					"value": "@dataset().dbNameInput",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"tableNameInput": {
+				"type": "string"
+			},
+			"dbNameInput": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().tableNameInput",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

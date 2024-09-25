@@ -1,0 +1,34 @@
+{
+	"name": "location_outputdataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sep24practice",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"outoutfolder": {
+				"type": "string"
+			},
+			"fileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().fileName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().outoutfolder",
+					"type": "Expression"
+				},
+				"container": "sep24"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

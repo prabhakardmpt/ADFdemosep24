@@ -1,0 +1,19 @@
+{
+	"name": "eventoutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sep24practice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "eventoutput",
+				"container": "sep24"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

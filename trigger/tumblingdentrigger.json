@@ -1,0 +1,35 @@
+{
+	"name": "tumblingdentrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "tmt_denpendency trigger",
+				"type": "PipelineReference"
+			}
+		},
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Minute",
+			"interval": 15,
+			"startTime": "2024-09-12T07:40:00Z",
+			"endTime": "2024-09-12T08:40:00Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 50,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": [
+				{
+					"type": "TumblingWindowTriggerDependencyReference",
+					"offset": "-0.00:03:00",
+					"referenceTrigger": {
+						"referenceName": "tumblingtrigger",
+						"type": "TriggerReference"
+					}
+				}
+			]
+		}
+	}
+}
